@@ -2,7 +2,9 @@ from fastapi import FastAPI
 from app.schemas import WordResponse
 from fastapi import HTTPException
 from app.routers import words
+from app.database import Base, engine
 
+Base.metadata.create_all(bind=engine)
 
 
 # Initialize FastAPI app
@@ -16,16 +18,6 @@ app.include_router(words.router,
     prefix="/api",
     tags=["words"])
         
-
-
-
-
-
-
-
-
-
-
 
 
 @app.get("/")
